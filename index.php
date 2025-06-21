@@ -1,44 +1,56 @@
 <?php
-require_once 'data.php';
+
+$categories_data = [
+    1 => ['id' => 1, 'name' => 'Healthcare',        'icon_class' => 'fa-solid fa-notes-medical'],
+    2 => ['id' => 2, 'name' => 'Food Banks',        'icon_class' => 'fa-solid fa-utensils'],
+    3 => ['id' => 3, 'name' => 'Community Centers', 'icon_class' => 'fa-solid fa-people-roof'],
+    4 => ['id' => 4, 'name' => 'Education',         'icon_class' => 'fa-solid fa-book-open-reader'],
+    5 => ['id' => 5, 'name' => 'Legal Aid',         'icon_class' => 'fa-solid fa-gavel']
+];
+
+$resources_data = [];
 
 $selected_category_id = isset($_GET['category']) ? (int)$_GET['category'] : 0;
 $filtered_resources = [];
 
 if ($selected_category_id > 0) {
-    foreach ($resources_data as $resource) {
-        if ($resource['category_id'] == $selected_category_id) {
-            $filtered_resources[] = $resource;
+    $resource_count = count($resources_data);
+    for ($i = 0; $i < $resource_count; $i++) {
+        if ($resources_data[$i]['category_id'] == $selected_category_id) {
+            $filtered_resources[] = $resources_data[$i];
         }
     }
 } else {
     $filtered_resources = $resources_data; 
 }
+
 $page_title = $selected_category_id > 0 && isset($categories_data[$selected_category_id])
     ? $categories_data[$selected_category_id]['name']
     : 'All Resources';
 ?>
 <!DOCTYPE html>
-<html lang="en" class="h-100">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Local Community Hub</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        .card-header i {
-            color: #0d6efd; 
-        }
-        .category-tag {
-            font-size: 0.85rem;
-        }
+        .card-header i { color: #0d6efd; }
+        .category-tag { font-size: 0.85rem; }
     </style>
 </head>
-<body class="d-flex flex-column h-100 bg-body-tertiary">
+<body class="d-flex flex-column min-vh-100 bg-body-tertiary">
     <header class="bg-dark text-white p-3 shadow-sm">
-        <div class="container">
-            <h1><a href="index.php" class="text-white text-decoration-none">Local Community Hub</a></h1>
-            <p class="lead mb-0">Your guide to local resources and services (Sto.Tomas, Batangas)</p>
+        <div class="container d-flex justify-content-between align-items-center">
+            <div>
+                <h1><a href="" class="text-white text-decoration-none">Local Community Hub</a></h1>
+                <p class="lead mb-0">Your guide to local resources and services (Sto.Tomas, Batangas)</p>
+            </div>
+            <div>
+                <button id="modeButton" class="btn btn-light" onclick="changeMode()">Dark Mode</button>
+            </div>
         </div>
     </header>
 
@@ -46,17 +58,22 @@ $page_title = $selected_category_id > 0 && isset($categories_data[$selected_cate
         <div class="container py-4">
             <div class="card mb-4">
                 <div class="card-body">
-                    <form action="index.php" method="GET" class="d-flex align-items-center">
+                    <form action="" method="GET" class="d-flex align-items-center">
                         <label for="category-filter" class="form-label me-2 mb-0 fw-bold">Filter by Category:</label>
                         <select name="category" id="category-filter" class="form-select w-auto me-2">
                             <option value="0">All Categories</option>
-                            <?php foreach ($categories_data as $category): ?>
+                            <?php 
+                                $category_keys = array_keys($categories_data);
+                                for ($i = 0; $i < count($category_keys); $i++):
+                                    $key = $category_keys[$i];
+                                    $category = $categories_data[$key];
+                            ?>
                             <option value="<?php echo $category['id']; ?>" <?php echo ($selected_category_id == $category['id']) ? 'selected' : ''; ?>>
                                 <?php echo htmlspecialchars($category['name']); ?>
                             </option>
-                            <?php endforeach; ?>
+                            <?php endfor; ?>
                         </select>
-                        <button type="submit" class="btn btn-primary">Filter</button>
+                        <button type="submit" class="btn btn-primary d-none">Filter</button>
                     </form>
                 </div>
             </div>
@@ -64,51 +81,47 @@ $page_title = $selected_category_id > 0 && isset($categories_data[$selected_cate
             <section class="resource-list">
                 <h2 class="pb-2 border-bottom mb-4"><?php echo htmlspecialchars($page_title); ?></h2>
 
-                <?php if (count($filtered_resources) > 0): ?>
-                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                        <?php foreach ($filtered_resources as $resource): ?>
-                            <?php $category = $categories_data[$resource['category_id']]; ?>
-                            <div class="col">
-                                <div class="card h-100 shadow-sm">
-                                    <div class="card-header bg-light d-flex align-items-center">
-                                        <i class="<?php echo htmlspecialchars($category['icon_class']); ?> fs-4 me-3"></i>
-                                        <h5 class="card-title mb-0"><?php echo htmlspecialchars($resource['name']); ?></h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-text"><?php echo htmlspecialchars($resource['description']); ?></p>
-                                    </div>
-                                    <div class="card-footer text-end">
-                                        <span class="badge bg-secondary category-tag"><?php echo htmlspecialchars($category['name']); ?></span>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-                <?php else: ?>
-                    <div class="alert alert-warning" role="alert">
-                        No resources found for the selected category.
-                    </div>
-                <?php endif; ?>
+                <div class="alert alert-warning" role="alert">
+                    No resources found for the selected category.
+                </div>
             </section>
         </div>
     </main>
     
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <footer class="footer mt-auto py-3 bg-dark text-white">
+        <div class="container text-center">
+            <span>© <?php echo date('Y'); ?> Local Community Hub. 
+                <a href="admin/index.php" class="text-white-50">Admin Login</a>
+            </span>
+        </div>
+    </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const categoryFilter = document.getElementById('category-filter');
-            const filterForm = document.querySelector('.filters form, .card-body form'); 
-            if (categoryFilter) {
-                const filterButton = filterForm.querySelector('button');
-                if (filterButton) { 
-                    filterButton.classList.add('d-none');
-                }
-                categoryFilter.addEventListener('change', function() {
-                    filterForm.submit();
-                });
-            }
-        });
+        let mode = "light"; 
+
+        function changeMode() {
+            const body = document.body;
+            const btnMode = document.getElementById("modeButton");
+            
+            mode = (mode == "light") ? "dark" : "light";
+
+            const btnText = (mode == "dark") ? "Light Mode" : "Dark Mode";
+            const btnClass = (mode == "dark") ? "btn-light" : "btn-dark";
+
+            btnMode.classList.remove("btn-light", "btn-dark");
+            btnMode.classList.add(btnClass);
+            btnMode.innerHTML = btnText;
+
+            body.setAttribute("data-bs-theme", mode);
+        }
+
+        var filter = document.getElementById('category-filter');
+        if (filter) {
+            filter.addEventListener('change', function() {
+                this.form.submit();
+            });
+        }
     </script>
 </body>
 </html>
