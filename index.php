@@ -64,14 +64,14 @@ $page_title = $selected_category_id > 0 && isset($categories_data[$selected_cate
                             <option value="0">All Categories</option>
                             <?php 
                                 $category_keys = array_keys($categories_data);
-                                for ($i = 0; $i < count($category_keys); $i++):
+                                for ($i = 0; $i < count($category_keys); $i++) {
                                     $key = $category_keys[$i];
                                     $category = $categories_data[$key];
                             ?>
                             <option value="<?php echo $category['id']; ?>" <?php echo ($selected_category_id == $category['id']) ? 'selected' : ''; ?>>
                                 <?php echo htmlspecialchars($category['name']); ?>
                             </option>
-                            <?php endfor; ?>
+                            <?php } ?>
                         </select>
                         <button type="submit" class="btn btn-primary d-none">Filter</button>
                     </form>
