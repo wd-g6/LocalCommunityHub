@@ -37,12 +37,18 @@ $page_title = $selected_category_id > 0 && isset($categories_data[$selected_cate
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        .card-header i { color: #0d6efd; }
-        .category-tag { font-size: 0.85rem; }
+        .card-header i { 
+            color: #0d6efd;
+         }
+
+        .category-tag { 
+            font-size: 0.85rem;
+         }
+
     </style>
 </head>
 <body class="d-flex flex-column min-vh-100 bg-body-tertiary">
-    <header class="bg-dark text-white p-3 shadow-sm">
+    <header class="text-white p-3 shadow-sm" style="background-color: #2d3250;">
         <div class="container d-flex justify-content-between align-items-center">
             <div>
                 <h1><a href="" class="text-white text-decoration-none">Local Community Hub</a></h1>
@@ -56,7 +62,7 @@ $page_title = $selected_category_id > 0 && isset($categories_data[$selected_cate
 
     <main class="flex-shrink-0">
         <div class="container py-4">
-            <div class="card mb-4">
+            <div class="card mb-4" style="background-color: #fdb17a;">
                 <div class="card-body">
                     <form action="" method="GET" class="d-flex align-items-center">
                         <label for="category-filter" class="form-label me-2 mb-0 fw-bold">Filter by Category:</label>
@@ -88,7 +94,7 @@ $page_title = $selected_category_id > 0 && isset($categories_data[$selected_cate
         </div>
     </main>
     
-    <footer class="footer mt-auto py-3 bg-dark text-white">
+    <footer class="footer mt-auto py-3 text-white" style="background-color: #2d3250;">
         <div class="container text-center">
             <span>© <?php echo date('Y'); ?> Local Community Hub. 
                 <a href="admin/index.php" class="text-white-50">Admin Login</a>
