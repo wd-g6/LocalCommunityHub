@@ -37,6 +37,14 @@ $page_title = $selected_category_id > 0 && isset($categories_data[$selected_cate
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        .header-logo {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #f8f9fa;
+        }
+
         .card-header i { 
             color: #0d6efd;
          }
@@ -50,9 +58,12 @@ $page_title = $selected_category_id > 0 && isset($categories_data[$selected_cate
 <body class="d-flex flex-column min-vh-100 bg-body-tertiary">
     <header class="text-white p-3 shadow-sm" style="background-color: #2d3250;">
         <div class="container d-flex justify-content-between align-items-center">
-            <div>
-                <h1><a href="" class="text-white text-decoration-none">Local Community Hub</a></h1>
-                <p class="lead mb-0">Your guide to local resources and services (Sto.Tomas, Batangas)</p>
+            <div class="d-flex align-items-center">
+                <img src="admin/img/sto tomas.jpg" alt="Community Hub Logo" class="header-logo me-3">
+                <div>
+                    <h1><a href="" class="text-white text-decoration-none">Local Community Hub</a></h1>
+                    <p class="lead mb-0">Your guide to local resources and services (Sto.Tomas, Batangas)</p>
+                </div>
             </div>
             <div>
                 <button id="modeButton" class="btn btn-light" onclick="changeMode()">Dark Mode</button>
