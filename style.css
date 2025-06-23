@@ -1,0 +1,15 @@
+.header-logo {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #f8f9fa;
+}
+
+.card-header i { 
+    color: #0d6efd;
+    }
+
+.category-tag { 
+    font-size: 0.85rem;
+    }

@@ -30,31 +30,16 @@ $page_title = $selected_category_id > 0 && isset($categories_data[$selected_cate
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Local Community Hub</title>
+    <title>Local Community Hub | Final Project</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        .header-logo {
-            height: 50px;
-            width: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #f8f9fa;
-        }
-
-        .card-header i { 
-            color: #0d6efd;
-         }
-
-        .category-tag { 
-            font-size: 0.85rem;
-         }
-
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="d-flex flex-column min-vh-100 bg-body-tertiary">
     <header class="text-white p-3 shadow-sm" style="background-color: #2d3250;">
         <div class="container d-flex justify-content-between align-items-center">
@@ -85,7 +70,8 @@ $page_title = $selected_category_id > 0 && isset($categories_data[$selected_cate
                                     $key = $category_keys[$i];
                                     $category = $categories_data[$key];
                             ?>
-                            <option value="<?php echo $category['id']; ?>" <?php echo ($selected_category_id == $category['id']) ? 'selected' : ''; ?>>
+                            <option value="<?php echo $category['id']; ?>" <?php echo
+                                ($selected_category_id==$category['id']) ? 'selected' : '' ; ?>>
                                 <?php echo htmlspecialchars($category['name']); ?>
                             </option>
                             <?php } ?>
@@ -96,7 +82,9 @@ $page_title = $selected_category_id > 0 && isset($categories_data[$selected_cate
             </div>
 
             <section class="resource-list">
-                <h2 class="pb-2 border-bottom mb-4"><?php echo htmlspecialchars($page_title); ?></h2>
+                <h2 class="pb-2 border-bottom mb-4">
+                    <?php echo htmlspecialchars($page_title); ?>
+                </h2>
 
                 <div class="alert alert-warning" role="alert">
                     No resources found for the selected category.
@@ -104,10 +92,11 @@ $page_title = $selected_category_id > 0 && isset($categories_data[$selected_cate
             </section>
         </div>
     </main>
-    
+
     <footer class="footer mt-auto py-3 text-white" style="background-color: #2d3250;">
         <div class="container text-center">
-            <span>© <?php echo date('Y'); ?> Local Community Hub. 
+            <span>©
+                <?php echo date('Y'); ?> Local Community Hub.
                 <a href="admin/index.php" class="text-white-50">Admin Login</a>
             </span>
         </div>
@@ -115,12 +104,12 @@ $page_title = $selected_category_id > 0 && isset($categories_data[$selected_cate
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        let mode = "light"; 
+        let mode = "light";
 
         function changeMode() {
             const body = document.body;
             const btnMode = document.getElementById("modeButton");
-            
+
             mode = (mode == "light") ? "dark" : "light";
 
             const btnText = (mode == "dark") ? "Light Mode" : "Dark Mode";
@@ -135,10 +124,11 @@ $page_title = $selected_category_id > 0 && isset($categories_data[$selected_cate
 
         var filter = document.getElementById('category-filter');
         if (filter) {
-            filter.addEventListener('change', function() {
+            filter.addEventListener('change', function () {
                 this.form.submit();
             });
         }
     </script>
 </body>
+
 </html>
