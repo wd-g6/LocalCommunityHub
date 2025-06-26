@@ -329,20 +329,10 @@ $page_title = $activeCategoryID > 0 && isset($allCategories[$activeCategoryID])
 <body class="d-flex flex-column min-vh-100">
     <header class="header text-white p-3 shadow-sm sticky-top">
         <div class="container d-flex justify-content-between align-items-center">
-<<<<<<< HEAD
             <a href="index.php" class="text-white text-decoration-none d-flex align-items-center">
                 <img src="content/sto tomas.jpg" alt="Community Hub Logo" class="header-logo me-3">
                 <span class="fs-4 fw-bold">Local Community Hub</span>
             </a>
-=======
-            <div class="d-flex align-items-center">
-                <img src="content/sto tomas.jpg" alt="Community Hub Logo" class="header-logo me-3">
-                <div>
-                    <h1><a href="" class="text-white text-decoration-none">Local Community Hub</a></h1>
-                    <p class="lead mb-0">Your guide to local resources and services (Sto.Tomas, Batangas)</p>
-                </div>
-            </div>
->>>>>>> 2a2913e7daede3649ded4b374ca765654e203d36
             <div>
                 <button id="modeButton" class="btn btn-outline-light">Dark Mode</button>
             </div>
