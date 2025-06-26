@@ -72,6 +72,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             padding: 2.5rem 3rem;
             width: 100%;
             max-width: 450px;
+            opacity: 0;
+            animation: fadeInUp 0.7s ease-out forwards;
         }
 
         .form-title {
@@ -143,6 +145,51 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         .back-link:hover {
             opacity: 1;
             text-decoration: underline;
+        }
+
+        .form-title,
+        .alert,
+        .input-wrapper,
+        .btn-login,
+        .back-link {
+            opacity: 0;
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+
+        .form-title {
+            animation-delay: 0.4s;
+        }
+
+        .alert {
+            animation-delay: 0.5s;
+        }
+
+        form .input-wrapper:nth-of-type(1) {
+            animation-delay: 0.6s;
+        }
+
+        form .input-wrapper:nth-of-type(2) {
+            animation-delay: 0.7s;
+        }
+
+        .btn-login {
+            animation-delay: 0.9s;
+        }
+
+        .back-link {
+            animation-delay: 1.1s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
