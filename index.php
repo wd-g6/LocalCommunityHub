@@ -28,7 +28,7 @@ if ($activeCategoryID > 0) {
 $prepared_query->execute();
 $db_data = $prepared_query->get_result();
 
-$page_title = $activeCategoryID > 0 && isset($allCategories[$activeCategoryID])
+$page_title_content = $activeCategoryID > 0 && isset($allCategories[$activeCategoryID])
     ? $allCategories[$activeCategoryID]['name']
     : 'All Resources';
 ?>
@@ -38,7 +38,7 @@ $page_title = $activeCategoryID > 0 && isset($allCategories[$activeCategoryID])
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Local Community Hub - Sto. Tomas, Batangas</title>
+    <title>Home - Local Community Hub</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,9 +47,10 @@ $page_title = $activeCategoryID > 0 && isset($allCategories[$activeCategoryID])
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #f4f7fc;
+            background: linear-gradient(to bottom, #F6A17A, #F7F8FA);
+            background-attachment: fixed;
             color: #212529;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: color 0.3s ease;
         }
 
         .header {
@@ -70,6 +71,16 @@ $page_title = $activeCategoryID > 0 && isset($allCategories[$activeCategoryID])
 
         .header-logo:hover {
             transform: scale(1.1) rotate(10deg);
+        }
+
+        .header .nav-link {
+            transition: color 0.2s ease-in-out;
+            font-weight: 500;
+        }
+
+        .header .nav-link:hover,
+        .header .nav-link.active {
+            color: #fdb17a !important;
         }
 
         .hero-section {
@@ -132,16 +143,28 @@ $page_title = $activeCategoryID > 0 && isset($allCategories[$activeCategoryID])
         }
 
         .btn-discover {
+            background-color: #fdb17a;
+            border-color: #fdb17a;
+            color: #212529;
             font-weight: 600;
             padding: 14px 35px;
             border-radius: 50px;
-            transition: all 0.3s ease;
+            transition: background-color 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.3s;
             box-shadow: 0 4px 15px rgba(253, 177, 122, 0.4);
         }
 
         .btn-discover:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(253, 177, 122, 0.6);
+            background-color: #ffc599;
+            border-color: #ffc599;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(253, 177, 122, 0.6), 0 0 12px rgba(255, 200, 150, 0.8);
+        }
+
+        .btn-discover:active {
+            background-color: #f5a469;
+            border-color: #f5a469;
+            transform: translateY(1px);
+            box-shadow: 0 2px 8px rgba(253, 177, 122, 0.4);
         }
 
         .card-resource {
@@ -269,12 +292,17 @@ $page_title = $activeCategoryID > 0 && isset($allCategories[$activeCategoryID])
         }
 
         [data-bs-theme="dark"] body {
-            background-color: #121212;
+            background: linear-gradient(to bottom, #121212, #1a1a2e);
             color: #f8f9fa;
         }
 
         [data-bs-theme="dark"] .header {
             background-color: rgba(31, 42, 64, 0.85);
+        }
+
+        [data-bs-theme="dark"] .header .nav-link:hover,
+        [data-bs-theme="dark"] .header .nav-link.active {
+            color: #ffb88c !important;
         }
 
         [data-bs-theme="dark"] .header-logo {
@@ -333,7 +361,11 @@ $page_title = $activeCategoryID > 0 && isset($allCategories[$activeCategoryID])
                 <img src="content/sto tomas.jpg" alt="Community Hub Logo" class="header-logo me-3">
                 <span class="fs-4 fw-bold">Local Community Hub</span>
             </a>
-            <div>
+            <div class="d-flex align-items-center">
+                <nav class="nav me-3">
+                    <a class="nav-link text-white active" href="index.php">Home</a>
+                    <a class="nav-link text-white" href="about.php">About</a>
+                </nav>
                 <button id="modeButton" class="btn btn-outline-light">Dark Mode</button>
             </div>
         </div>
@@ -344,7 +376,7 @@ $page_title = $activeCategoryID > 0 && isset($allCategories[$activeCategoryID])
             <div class="container px-4">
                 <h1>Welcome to the Sto. Tomas Community Hub</h1>
                 <p>Your one-stop guide to essential services, places, and support within our vibrant city.</p>
-                <a href="#resources-section" id="discoverBtn" class="btn btn-warning btn-lg btn-discover">
+                <a href="#resources-section" id="discoverBtn" class="btn btn-lg btn-discover">
                     Explore Resources <i class="fas fa-arrow-down ms-2"></i>
                 </a>
             </div>
@@ -373,8 +405,7 @@ $page_title = $activeCategoryID > 0 && isset($allCategories[$activeCategoryID])
             </section>
 
             <section id="resources-section">
-                <h2 class="pb-2 border-bottom mb-4 fw-bold"><?php echo htmlspecialchars($page_title); ?></h2>
-
+                <h2 class="pb-2 border-bottom mb-4 fw-bold"><?php echo htmlspecialchars($page_title_content); ?></h2>
                 <?php if ($db_data->num_rows == 0) { ?>
                     <div class="alert alert-warning text-center p-5 shadow-sm" role="alert">
                         <i class="fas fa-info-circle fa-3x mb-3 text-warning"></i>
@@ -387,44 +418,22 @@ $page_title = $activeCategoryID > 0 && isset($allCategories[$activeCategoryID])
                             <div class="col-md-6 col-lg-4 d-flex">
                                 <div class="card card-resource w-100 shadow-sm">
                                     <div class="card-img-container">
-                                        <span class="badge rounded-pill category-tag">
-                                            <i class="<?php echo htmlspecialchars($listing['icon_class']); ?> me-1"></i>
-                                            <?php echo htmlspecialchars($listing['category_name']); ?>
-                                        </span>
+                                        <span class="badge rounded-pill category-tag"><i class="<?php echo htmlspecialchars($listing['icon_class']); ?> me-1"></i><?php echo htmlspecialchars($listing['category_name']); ?></span>
                                         <?php if (!empty($listing['image_path'])) { ?>
-                                            <img src="content/resource_images/<?php echo htmlspecialchars($listing['image_path']); ?>"
-                                                class="card-img-body"
-                                                alt="<?php echo htmlspecialchars($listing['name']); ?>">
+                                            <img src="content/resource_images/<?php echo htmlspecialchars($listing['image_path']); ?>" class="card-img-body" alt="<?php echo htmlspecialchars($listing['name']); ?>">
                                         <?php } else { ?>
-                                            <div class="card-img-body bg-light d-flex align-items-center justify-content-center">
-                                                <i class="fas fa-image fa-3x text-light-emphasis"></i>
-                                            </div>
+                                            <div class="card-img-body bg-light d-flex align-items-center justify-content-center"><i class="fas fa-image fa-3x text-light-emphasis"></i></div>
                                         <?php } ?>
                                     </div>
                                     <div class="card-header">
-                                        <h5 class="mb-0 card-title fw-bold">
-                                            <?php echo htmlspecialchars($listing['name']); ?>
-                                        </h5>
+                                        <h5 class="mb-0 card-title fw-bold"><?php echo htmlspecialchars($listing['name']); ?></h5>
                                     </div>
                                     <div class="card-body">
-                                        <p class="card-text text-muted small">
-                                            <?php echo nl2br(htmlspecialchars($listing['description'])); ?>
-                                        </p>
+                                        <p class="card-text text-muted small"><?php echo nl2br(htmlspecialchars($listing['description'])); ?></p>
                                     </div>
                                     <ul class="list-group list-group-flush">
-                                        <?php if (!empty($listing['address'])) { ?>
-                                            <li class="list-group-item">
-                                                <i class="fas fa-map-marker-alt"></i> <?php echo htmlspecialchars($listing['address']); ?>
-                                            </li>
-                                        <?php } ?>
-                                        <?php if (!empty($listing['phone'])) { ?>
-                                            <li class="list-group-item">
-                                                <i class="fas fa-phone"></i>
-                                                <a href="tel:<?php echo htmlspecialchars(str_replace([' ', '-'], '', $listing['phone'])); ?>" class="text-decoration-none text-body">
-                                                    <?php echo htmlspecialchars($listing['phone']); ?>
-                                                </a>
-                                            </li>
-                                        <?php } ?>
+                                        <?php if (!empty($listing['address'])) { ?><li class="list-group-item"><i class="fas fa-map-marker-alt"></i> <?php echo htmlspecialchars($listing['address']); ?></li><?php } ?>
+                                        <?php if (!empty($listing['phone'])) { ?><li class="list-group-item"><i class="fas fa-phone"></i> <a href="tel:<?php echo htmlspecialchars(str_replace([' ', '-'], '', $listing['phone'])); ?>" class="text-decoration-none text-body"><?php echo htmlspecialchars($listing['phone']); ?></a></li><?php } ?>
                                     </ul>
                                 </div>
                             </div>
@@ -437,8 +446,8 @@ $page_title = $activeCategoryID > 0 && isset($allCategories[$activeCategoryID])
 
     <footer class="footer mt-auto py-3">
         <div class="container text-center">
-            <span class="text-white">© <?php echo date('Y'); ?> Local Community Hub. </span>
-            <a href="admin/" class="text-white-50">Admin Login</a>
+            <span class="text-white-50">© <?php echo date('Y'); ?> Local Community Hub. </span>
+            <a href="admin/" class="text-white">Admin Login</a>
         </div>
     </footer>
 
@@ -452,7 +461,6 @@ $page_title = $activeCategoryID > 0 && isset($allCategories[$activeCategoryID])
                 var btnMode = document.getElementById("modeButton");
                 var btnText = mode == "dark" ? "Light Mode" : "Dark Mode";
                 var btnClass = mode == "dark" ? "btn-light" : "btn-dark";
-
                 btnMode.classList.remove("btn-light", "btn-dark", "btn-outline-light");
                 btnMode.classList.add(btnClass);
                 btnMode.textContent = btnText;
@@ -464,11 +472,8 @@ $page_title = $activeCategoryID > 0 && isset($allCategories[$activeCategoryID])
                 localStorage.setItem('theme', mode);
                 applyTheme();
             }
-
             applyTheme();
-
             document.getElementById('modeButton').addEventListener('click', changeMode);
-
             const discoverBtn = document.getElementById('discoverBtn');
             if (discoverBtn) {
                 discoverBtn.addEventListener('click', function(e) {
@@ -478,7 +483,6 @@ $page_title = $activeCategoryID > 0 && isset($allCategories[$activeCategoryID])
                     });
                 });
             }
-
             const cards = document.querySelectorAll('.card-resource');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry, index) => {
@@ -492,7 +496,6 @@ $page_title = $activeCategoryID > 0 && isset($allCategories[$activeCategoryID])
             }, {
                 threshold: 0.1
             });
-
             cards.forEach(card => {
                 observer.observe(card);
             });

@@ -34,6 +34,7 @@ $categoryCount = count($allCategories);
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,13 +43,17 @@ $categoryCount = count($allCategories);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body {
-            background-color: #f4f7f6;
+            background: linear-gradient(to bottom, #F6A17A, #F7F8FA);
+            background-attachment: fixed;
+            overflow-x: hidden;
         }
+
         .wrapper {
             display: flex;
             width: 100%;
             align-items: stretch;
         }
+
         #sidebar {
             min-width: 250px;
             max-width: 250px;
@@ -56,13 +61,16 @@ $categoryCount = count($allCategories);
             color: #fff;
             transition: all 0.3s;
         }
+
         #sidebar .sidebar-header {
             padding: 20px;
             background: #1a252f;
         }
+
         #sidebar ul.components {
             padding: 20px 0;
         }
+
         #sidebar ul li a {
             padding: 15px 20px;
             font-size: 1.1em;
@@ -72,21 +80,25 @@ $categoryCount = count($allCategories);
             transition: all 0.2s;
             border-left: 3px solid transparent;
         }
+
         #sidebar ul li a:hover {
             color: #ffffff;
             background: #34495e;
         }
+
         #sidebar ul li.active>a {
             color: #fff;
             background: #1c2a38;
             border-left: 3px solid #fdb17a;
         }
+
         #content {
             width: 100%;
             padding: 20px;
             min-height: 100vh;
             transition: all 0.3s;
         }
+
         .stat-card {
             border: none;
             color: white;
@@ -94,6 +106,7 @@ $categoryCount = count($allCategories);
             position: relative;
             overflow: hidden;
         }
+
         .stat-card .stat-icon {
             font-size: 4rem;
             opacity: 0.15;
@@ -103,20 +116,37 @@ $categoryCount = count($allCategories);
             transform: translateY(-50%);
             transition: transform 0.3s ease-out;
         }
+
         .stat-card:hover .stat-icon {
             transform: translateY(-50%) scale(1.1);
         }
-        .bg-gradient-primary {
-            background-image: linear-gradient(45deg, #0d6efd, #6f42c1);
+        
+        /* --- ANIMATION STYLES --- */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        .bg-gradient-success {
-            background-image: linear-gradient(45deg, #198754, #fd7e14);
+
+        .animate-on-load {
+            opacity: 0; /* Start hidden */
+            animation: fadeInUp 0.7s ease-out forwards;
         }
+
+        /* Let the table use default bootstrap hover effect on light backgrounds */
         .table-hover tbody tr:hover {
-            background-color: rgba(0, 0, 0, 0.05);
+            color: var(--bs-table-hover-color);
+            background-color: var(--bs-table-hover-bg);
         }
+
     </style>
 </head>
+
 <body>
     <div class="wrapper">
         <nav id="sidebar">
@@ -131,7 +161,7 @@ $categoryCount = count($allCategories);
         </nav>
 
         <div id="content">
-            <nav class="navbar navbar-expand-lg navbar-light bg-white mb-4 shadow-sm rounded">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white mb-4 shadow-sm rounded animate-on-load" style="animation-delay: 0.1s;">
                 <div class="container-fluid">
                     <span class="navbar-brand mb-0 h1">Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</span>
                     <div class="ms-auto">
@@ -141,12 +171,12 @@ $categoryCount = count($allCategories);
                 </div>
             </nav>
 
-            <h1 class="mb-4 text-dark">Dashboard Overview</h1>
+            <h1 class="mb-4 text-dark animate-on-load" style="animation-delay: 0.2s;">Dashboard Overview</h1>
 
             <section class="stats mb-5">
                 <div class="row g-4">
-                    <div class="col-md-6">
-                        <div class="card stat-card shadow-sm bg-gradient-primary">
+                    <div class="col-md-6 animate-on-load" style="animation-delay: 0.3s;">
+                        <div class="card stat-card shadow-sm" style="background-color: #424769;">
                             <div class="card-body p-4">
                                 <i class="fa-solid fa-book-bookmark stat-icon"></i>
                                 <h2 class="card-title display-4 fw-bold"><?php echo $resourceCount; ?></h2>
@@ -154,8 +184,8 @@ $categoryCount = count($allCategories);
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="card stat-card shadow-sm bg-gradient-success">
+                    <div class="col-md-6 animate-on-load" style="animation-delay: 0.4s;">
+                        <div class="card stat-card shadow-sm" style="background-color: #fdb17a; color: #2d3250;">
                             <div class="card-body p-4">
                                 <i class="fa-solid fa-tags stat-icon"></i>
                                 <h2 class="card-title display-4 fw-bold"><?php echo $categoryCount; ?></h2>
@@ -166,7 +196,8 @@ $categoryCount = count($allCategories);
                 </div>
             </section>
 
-            <section class="data-table">
+            <section class="data-table animate-on-load" style="animation-delay: 0.5s;">
+                <!-- REVERTED TO A CLEAN, WHITE CARD -->
                 <div class="card shadow-sm">
                     <div class="card-header bg-white border-0">
                         <h4 class="card-title mb-0"><i class="fas fa-list me-2"></i>All Resources</h4>
@@ -198,7 +229,7 @@ $categoryCount = count($allCategories);
                                                     <?php
                                                     $category_details = $allCategories[$res_record['category_id']] ?? null;
                                                     if ($category_details) {
-                                                        echo '<i class="' . htmlspecialchars($category_details['icon_class']) . ' me-2 text-primary"></i>';
+                                                        echo '<i class="' . htmlspecialchars($category_details['icon_class']) . ' me-2"></i>';
                                                         echo htmlspecialchars($category_details['name']);
                                                     } else {
                                                         echo '<span class="text-muted fst-italic">Uncategorized</span>';
@@ -219,4 +250,5 @@ $categoryCount = count($allCategories);
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
