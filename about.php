@@ -11,7 +11,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* --- CORE STYLES --- */
         body {
             font-family: 'Poppins', sans-serif;
             color: #2d3250;
@@ -53,8 +52,6 @@
         .footer {
             background-color: #2d3250;
         }
-
-        /* --- STUNNING ABOUT PAGE STYLES --- */
 
         body::before {
             content: '';
@@ -121,8 +118,7 @@
             font-size: 3rem;
             margin-bottom: 1.5rem;
         }
-        
-        /* --- TEAM CARD STYLES (NOW MORE COMPACT) --- */
+
         .team-card-wrapper {
             margin-top: 60px;
             height: 100%; 
@@ -133,7 +129,7 @@
             background-color: #424769;
             color: #e0e0e0;
             border-radius: 1rem;
-            padding-top: 50px; /* UPDATED: Slightly reduced top padding */
+            padding-top: 50px;
             text-align: center;
             box-shadow: 0 8px 24px rgba(45, 50, 80, 0.08);
             transition: all 0.4s ease;
@@ -178,7 +174,6 @@
         
         .team-social-links {
             margin-top: auto; 
-            /* UPDATED: Reduced space above the links */
             padding-top: 0.5rem; 
         }
 
@@ -299,14 +294,12 @@
 
     <main class="flex-shrink-0">
         <div class="container py-5 mt-4">
-            <!-- INTRO SECTION -->
             <section class="text-center mb-5 section-animate">
                 <span class="about-badge mb-3">ABOUT US</span>
                 <h1 class="display-3 fw-bold">Bridging Sto. Tomas, One Connection at a Time.</h1>
                 <p class="lead text-muted mx-auto" style="max-width: 700px;">We are a passionate team dedicated to empowering our community by making vital information accessible, clear, and reliable for every Tomasino.</p>
             </section>
 
-            <!-- CORE VALUES -->
             <section class="mb-5 pb-5 section-animate" style="animation-delay: 0.2s;">
                 <div class="row g-4 text-center">
                     <div class="col-md-4 core-value-card">
@@ -327,7 +320,6 @@
                 </div>
             </section>
 
-            <!-- MISSION & VISION -->
             <section class="mb-5 pb-5 section-animate" style="animation-delay: 0.4s;">
                 <div class="row g-4 align-items-stretch">
                     <div class="col-lg-6">
@@ -347,13 +339,11 @@
                 </div>
             </section>
 
-            <!-- TEAM SECTION -->
             <section class="text-center section-animate" style="animation-delay: 0.6s;">
                 <h2 class="display-5 fw-bold">Meet the Team</h2>
                 <p class="lead text-muted mb-5">The passionate minds behind the Community Hub.</p>
 
                 <div class="row justify-content-center align-items-stretch">
-                    <!-- Member 1 -->
                     <div class="col-lg-4 col-md-6 mb-5">
                         <div class="team-card-wrapper">
                             <div class="team-card">
@@ -368,7 +358,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Member 2 -->
                     <div class="col-lg-4 col-md-6 mb-5">
                         <div class="team-card-wrapper">
                             <div class="team-card">
@@ -383,7 +372,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Member 3 -->
                     <div class="col-lg-4 col-md-6 mb-5">
                         <div class="team-card-wrapper">
                             <div class="team-card">
@@ -398,7 +386,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Member 4 -->
                     <div class="col-lg-4 col-md-6 mb-5">
                         <div class="team-card-wrapper">
                             <div class="team-card">
@@ -413,7 +400,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Member 5 -->
                     <div class="col-lg-4 col-md-6 mb-5">
                         <div class="team-card-wrapper">
                             <div class="team-card">

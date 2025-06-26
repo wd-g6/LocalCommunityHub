@@ -120,13 +120,13 @@ $categoryCount = count($allCategories);
         .stat-card:hover .stat-icon {
             transform: translateY(-50%) scale(1.1);
         }
-        
-        /* --- ANIMATION STYLES --- */
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -134,16 +134,14 @@ $categoryCount = count($allCategories);
         }
 
         .animate-on-load {
-            opacity: 0; /* Start hidden */
+            opacity: 0;
             animation: fadeInUp 0.7s ease-out forwards;
         }
 
-        /* Let the table use default bootstrap hover effect on light backgrounds */
         .table-hover tbody tr:hover {
             color: var(--bs-table-hover-color);
             background-color: var(--bs-table-hover-bg);
         }
-
     </style>
 </head>
 
@@ -197,7 +195,6 @@ $categoryCount = count($allCategories);
             </section>
 
             <section class="data-table animate-on-load" style="animation-delay: 0.5s;">
-                <!-- REVERTED TO A CLEAN, WHITE CARD -->
                 <div class="card shadow-sm">
                     <div class="card-header bg-white border-0">
                         <h4 class="card-title mb-0"><i class="fas fa-list me-2"></i>All Resources</h4>
