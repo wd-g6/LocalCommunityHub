@@ -48,55 +48,9 @@ $categoryCount = count($allCategories);
             overflow-x: hidden;
         }
 
-        .wrapper {
-            display: flex;
-            width: 100%;
-            align-items: stretch;
-        }
-
-        #sidebar {
-            min-width: 250px;
-            max-width: 250px;
-            background: #2c3e50;
-            color: #fff;
-            transition: all 0.3s;
-        }
-
-        #sidebar .sidebar-header {
-            padding: 20px;
-            background: #1a252f;
-        }
-
-        #sidebar ul.components {
-            padding: 20px 0;
-        }
-
-        #sidebar ul li a {
-            padding: 15px 20px;
-            font-size: 1.1em;
-            display: block;
-            color: #adb5bd;
-            text-decoration: none;
-            transition: all 0.2s;
-            border-left: 3px solid transparent;
-        }
-
-        #sidebar ul li a:hover {
-            color: #ffffff;
-            background: #34495e;
-        }
-
-        #sidebar ul li.active>a {
-            color: #fff;
-            background: #1c2a38;
-            border-left: 3px solid #fdb17a;
-        }
-
-        #content {
-            width: 100%;
+        .container-fluid {
             padding: 20px;
             min-height: 100vh;
-            transition: all 0.3s;
         }
 
         .stat-card {
@@ -142,107 +96,104 @@ $categoryCount = count($allCategories);
             color: var(--bs-table-hover-color);
             background-color: var(--bs-table-hover-bg);
         }
+
+        .admin-header {
+            background: #2c3e50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 0.75rem;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 
 <body>
-    <div class="wrapper">
-        <nav id="sidebar">
-            <div class="sidebar-header text-center">
-                <h3><i class="fa-solid fa-shield-halved me-2"></i>Admin Panel</h3>
+    <div class="container-fluid">
+        <div class="admin-header text-center animate-on-load" style="animation-delay: 0.1s;">
+            <h3><i class="fa-solid fa-shield-halved me-2"></i>Admin Panel Dashboard</h3>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center bg-white p-3 rounded shadow-sm mb-4 animate-on-load" style="animation-delay: 0.2s;">
+            <span class="fw-bold fs-4">Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</span>
+            <div>
+                <a href="../" target="_blank" class="btn btn-outline-primary"><i class="fas fa-globe me-1"></i> View Public Site</a>
+                <a href="?action=logout" class="btn btn-outline-danger ms-2"><i class="fas fa-sign-out-alt me-1"></i> Logout</a>
             </div>
-            <ul class="list-unstyled components">
-                <li class="active">
-                    <a href="index.php"><i class="fas fa-tachometer-alt me-3"></i>Dashboard</a>
-                </li>
-            </ul>
-        </nav>
+        </div>
 
-        <div id="content">
-            <nav class="navbar navbar-expand-lg navbar-light bg-white mb-4 shadow-sm rounded animate-on-load" style="animation-delay: 0.1s;">
-                <div class="container-fluid">
-                    <span class="navbar-brand mb-0 h1">Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</span>
-                    <div class="ms-auto">
-                        <a href="../" target="_blank" class="btn btn-outline-primary"><i class="fas fa-globe me-1"></i> View Public Site</a>
-                        <a href="?action=logout" class="btn btn-outline-danger ms-2"><i class="fas fa-sign-out-alt me-1"></i> Logout</a>
-                    </div>
-                </div>
-            </nav>
+        <h1 class="mb-4 text-dark animate-on-load" style="animation-delay: 0.3s;">Dashboard Overview</h1>
 
-            <h1 class="mb-4 text-dark animate-on-load" style="animation-delay: 0.2s;">Dashboard Overview</h1>
-
-            <section class="stats mb-5">
-                <div class="row g-4">
-                    <div class="col-md-6 animate-on-load" style="animation-delay: 0.3s;">
-                        <div class="card stat-card shadow-sm" style="background-color: #424769;">
-                            <div class="card-body p-4">
-                                <i class="fa-solid fa-book-bookmark stat-icon"></i>
-                                <h2 class="card-title display-4 fw-bold"><?php echo $resourceCount; ?></h2>
-                                <p class="card-text fs-5">Total Resources</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 animate-on-load" style="animation-delay: 0.4s;">
-                        <div class="card stat-card shadow-sm" style="background-color: #fdb17a; color: #2d3250;">
-                            <div class="card-body p-4">
-                                <i class="fa-solid fa-tags stat-icon"></i>
-                                <h2 class="card-title display-4 fw-bold"><?php echo $categoryCount; ?></h2>
-                                <p class="card-text fs-5">Total Categories</p>
-                            </div>
+        <section class="stats mb-5">
+            <div class="row g-4">
+                <div class="col-md-6 animate-on-load" style="animation-delay: 0.4s;">
+                    <div class="card stat-card shadow-sm" style="background-color: #424769;">
+                        <div class="card-body p-4">
+                            <i class="fa-solid fa-book-bookmark stat-icon"></i>
+                            <h2 class="card-title display-4 fw-bold"><?php echo $resourceCount; ?></h2>
+                            <p class="card-text fs-5">Total Resources</p>
                         </div>
                     </div>
                 </div>
-            </section>
-
-            <section class="data-table animate-on-load" style="animation-delay: 0.5s;">
-                <div class="card shadow-sm">
-                    <div class="card-header bg-white border-0">
-                        <h4 class="card-title mb-0"><i class="fas fa-list me-2"></i>All Resources</h4>
+                <div class="col-md-6 animate-on-load" style="animation-delay: 0.5s;">
+                    <div class="card stat-card shadow-sm" style="background-color: #fdb17a; color: #2d3250;">
+                        <div class="card-body p-4">
+                            <i class="fa-solid fa-tags stat-icon"></i>
+                            <h2 class="card-title display-4 fw-bold"><?php echo $categoryCount; ?></h2>
+                            <p class="card-text fs-5">Total Categories</p>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-hover align-middle">
-                                <thead class="table-dark">
+                </div>
+            </div>
+        </section>
+
+        <section class="data-table animate-on-load" style="animation-delay: 0.6s;">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white border-0">
+                    <h4 class="card-title mb-0"><i class="fas fa-list me-2"></i>All Resources</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover align-middle">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Resource Name</th>
+                                    <th>Category</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if ($resources_from_db->num_rows == 0) { ?>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Resource Name</th>
-                                        <th>Category</th>
+                                        <td colspan="3" class="text-center text-muted p-4">
+                                            <i class="fas fa-info-circle fa-2x mb-2 d-block"></i>
+                                            No resource data found in the database.
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    <?php if ($resources_from_db->num_rows == 0) { ?>
+                                <?php } else { ?>
+                                    <?php while ($res_record = $resources_from_db->fetch_assoc()) { ?>
                                         <tr>
-                                            <td colspan="3" class="text-center text-muted p-4">
-                                                <i class="fas fa-info-circle fa-2x mb-2 d-block"></i>
-                                                No resource data found in the database.
+                                            <td><?php echo htmlspecialchars($res_record['id']); ?></td>
+                                            <td><?php echo htmlspecialchars($res_record['name']); ?></td>
+                                            <td>
+                                                <?php
+                                                $category_details = $allCategories[$res_record['category_id']] ?? null;
+                                                if ($category_details) {
+                                                    echo '<i class="' . htmlspecialchars($category_details['icon_class']) . ' me-2"></i>';
+                                                    echo htmlspecialchars($category_details['name']);
+                                                } else {
+                                                    echo '<span class="text-muted fst-italic">Uncategorized</span>';
+                                                }
+                                                ?>
                                             </td>
                                         </tr>
-                                    <?php } else { ?>
-                                        <?php while ($res_record = $resources_from_db->fetch_assoc()) { ?>
-                                            <tr>
-                                                <td><?php echo htmlspecialchars($res_record['id']); ?></td>
-                                                <td><?php echo htmlspecialchars($res_record['name']); ?></td>
-                                                <td>
-                                                    <?php
-                                                    $category_details = $allCategories[$res_record['category_id']] ?? null;
-                                                    if ($category_details) {
-                                                        echo '<i class="' . htmlspecialchars($category_details['icon_class']) . ' me-2"></i>';
-                                                        echo htmlspecialchars($category_details['name']);
-                                                    } else {
-                                                        echo '<span class="text-muted fst-italic">Uncategorized</span>';
-                                                    }
-                                                    ?>
-                                                </td>
-                                            </tr>
-                                        <?php } ?>
                                     <?php } ?>
-                                </tbody>
-                            </table>
-                        </div>
+                                <?php } ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
